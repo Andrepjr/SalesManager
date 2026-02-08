@@ -20,10 +20,17 @@ export const StoreProvider = ({ children }) => {
         const saved = localStorage.getItem('settings');
         // Default: 14% commision + 6% free shipping = 20%, or configurable
         // Fixed fee per item is usually R$3 in Brazil for items < R$79? Let's keep it simple for now or detailed.
-        return saved ? JSON.parse(saved) : {
+        let initialSettings = saved ? JSON.parse(saved) : {
             shopeeFeePercent: 20, // Example default
             fixedFee: 4 // Example fixed fee per item
         };
+
+        // Migration: Fix old fee (3) to new fee (4) automatically
+        if (initialSettings.fixedFee === 3) {
+            initialSettings.fixedFee = 4;
+        }
+
+        return initialSettings;
     });
 
     // Persistence effects
@@ -38,13 +45,6 @@ export const StoreProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('settings', JSON.stringify(settings));
     }, [settings]);
-
-    // Migration: Fix old fee (3) to new fee (4) automatically
-    useEffect(() => {
-        if (settings.fixedFee === 3) {
-            setSettings(prev => ({ ...prev, fixedFee: 4 }));
-        }
-    }, [settings.fixedFee]);
 
     // Actions
     const addProduct = (product) => {

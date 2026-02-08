@@ -51,7 +51,7 @@ const InventoryList = () => {
 
     if (editingId) {
         const product = products.find(p => p.id === editingId);
-        return <ProductForm initialData={product} onSave={() => setEditingId(null)} />;
+        return <ProductForm key={product.id} initialData={product} onSave={() => setEditingId(null)} />;
     }
 
     const formatCurrency = (val) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val);
@@ -65,19 +65,19 @@ const InventoryList = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <div>
-                <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>Estoque</h1>
+                <h1 className="page-title">Estoque</h1>
                 <p style={{ color: 'var(--text-secondary)' }}>Gerencie seus produtos e registre vendas.</p>
             </div>
 
-            <div className="glass-panel" style={{ overflowX: 'auto' }}>
+            <div className="glass-panel table-container">
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                     <thead>
-                        <tr style={{ borderBottom: '1px solid var(--glass-border)' }}>
-                            <th style={{ padding: '1rem' }}>Produto</th>
-                            <th style={{ padding: '1rem' }}>Estoque</th>
-                            <th style={{ padding: '1rem' }}>Custo</th>
-                            <th style={{ padding: '1rem' }}>Preço Venda</th>
-                            <th style={{ padding: '1rem' }}>Ações</th>
+                        <tr className="table-header">
+                            <th className="table-cell">Produto</th>
+                            <th className="table-cell">Estoque</th>
+                            <th className="table-cell">Custo</th>
+                            <th className="table-cell">Preço Venda</th>
+                            <th className="table-cell">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,18 +89,18 @@ const InventoryList = () => {
                             </tr>
                         ) : (
                             products.map(p => (
-                                <tr key={p.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                                    <td style={{ padding: '1rem' }}>
+                                <tr key={p.id} className="table-row">
+                                    <td className="table-cell">
                                         <div style={{ fontWeight: 600 }}>{p.name}</div>
                                         <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{p.sku}</div>
                                     </td>
-                                    <td style={{ padding: '1rem', color: p.stock < 5 ? 'var(--warning-color)' : 'inherit' }}>
+                                    <td className="table-cell" style={{ color: p.stock < 5 ? 'var(--warning-color)' : 'inherit' }}>
                                         {p.stock}
                                     </td>
-                                    <td style={{ padding: '1rem' }}>{formatCurrency(p.costPrice)}</td>
-                                    <td style={{ padding: '1rem' }}>{formatCurrency(p.sellingPrice)}</td>
-                                    <td style={{ padding: '1rem' }}>
-                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <td className="table-cell">{formatCurrency(p.costPrice)}</td>
+                                    <td className="table-cell">{formatCurrency(p.sellingPrice)}</td>
+                                    <td className="table-cell">
+                                        <div className="action-buttons">
                                             <button
                                                 onClick={() => setSaleModalProduct(p)}
                                                 title="Registrar Venda"

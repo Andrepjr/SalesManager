@@ -11,15 +11,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     ];
 
     return (
-        <aside className="glass-panel" style={{
-            width: '250px',
-            height: 'calc(100vh - 2rem)',
-            margin: '1rem',
-            padding: '2rem 1rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2rem'
-        }}>
+        <aside className="glass-panel sidebar">
             <div className="logo" style={{ textAlign: 'center', marginBottom: '1rem' }}>
                 <h2 style={{
                     background: 'linear-gradient(to right, #38bdf8, #3b82f6)',
@@ -37,18 +29,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                     <button
                         key={item.id}
                         onClick={() => setActiveTab(item.id)}
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '1rem',
-                            padding: '1rem',
-                            width: '100%',
-                            borderRadius: 'var(--radius-md)',
-                            background: activeTab === item.id ? 'rgba(59, 130, 246, 0.2)' : 'transparent',
-                            color: activeTab === item.id ? 'var(--text-primary)' : 'var(--text-secondary)',
-                            transition: 'all 0.2s ease',
-                            textAlign: 'left'
-                        }}
+                        className={`nav-link ${activeTab === item.id ? 'active' : ''}`}
                     >
                         <span style={{ fontSize: '1.2rem' }}>{item.icon}</span>
                         <span style={{ fontWeight: 500 }}>{item.label}</span>
@@ -56,7 +37,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                 ))}
             </nav>
 
-            <div style={{ marginTop: 'auto', padding: '1rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+            <div className="version-tag" style={{ marginTop: 'auto', padding: '1rem', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                 v1.0.0
             </div>
         </aside>

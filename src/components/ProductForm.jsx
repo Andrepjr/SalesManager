@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useStore } from '../context/StoreContext';
 import { FaSave, FaArrowLeft } from 'react-icons/fa';
 
 const ProductForm = ({ onSave, initialData = null }) => {
     const { addProduct, updateProduct, settings } = useStore();
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState(initialData || {
         name: '',
         sku: '',
         costPrice: '',
         sellingPrice: '',
         stock: ''
     });
-
-    useEffect(() => {
-        if (initialData) {
-            setFormData(initialData);
-        }
-    }, [initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -48,7 +42,7 @@ const ProductForm = ({ onSave, initialData = null }) => {
     const margin = price > 0 ? (estimatedProfit / price) * 100 : 0;
 
     return (
-        <div className="glass-panel" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+        <div className="glass-panel form-container">
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
                 <button onClick={onSave} style={{ color: 'var(--text-secondary)', fontSize: '1.2rem' }}>
                     <FaArrowLeft />
@@ -57,7 +51,7 @@ const ProductForm = ({ onSave, initialData = null }) => {
             </div>
 
             <form onSubmit={handleSubmit} style={{ display: 'grid', gap: '1.5rem' }}>
-                <div style={{ display: 'grid', gap: '0.5rem' }}>
+                <div className="form-group">
                     <label>Nome do Produto</label>
                     <input
                         className="glass-input"
@@ -69,8 +63,8 @@ const ProductForm = ({ onSave, initialData = null }) => {
                     />
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                    <div style={{ display: 'grid', gap: '0.5rem' }}>
+                <div className="form-grid-2">
+                    <div className="form-group">
                         <label>SKU (Opcional)</label>
                         <input
                             className="glass-input"
@@ -80,7 +74,7 @@ const ProductForm = ({ onSave, initialData = null }) => {
                             placeholder="Ex: CAM-001"
                         />
                     </div>
-                    <div style={{ display: 'grid', gap: '0.5rem' }}>
+                    <div className="form-group">
                         <label>Estoque Inicial</label>
                         <input
                             className="glass-input"
@@ -94,8 +88,8 @@ const ProductForm = ({ onSave, initialData = null }) => {
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                    <div style={{ display: 'grid', gap: '0.5rem' }}>
+                <div className="form-grid-2">
+                    <div className="form-group">
                         <label>Preço de Custo (R$)</label>
                         <input
                             className="glass-input"
@@ -108,7 +102,7 @@ const ProductForm = ({ onSave, initialData = null }) => {
                             min="0"
                         />
                     </div>
-                    <div style={{ display: 'grid', gap: '0.5rem' }}>
+                    <div className="form-group">
                         <label>Preço de Venda (R$)</label>
                         <input
                             className="glass-input"
@@ -126,7 +120,7 @@ const ProductForm = ({ onSave, initialData = null }) => {
                 {/* Simulation Card */}
                 <div className="glass-card" style={{ padding: '1.5rem', marginTop: '1rem' }}>
                     <h3 style={{ marginBottom: '1rem', fontSize: '1rem', color: 'var(--text-accent)' }}>Simulação de Lucro (Shopee)</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', textAlign: 'center' }}>
+                    <div className="simulation-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', textAlign: 'center' }}>
                         <div>
                             <small style={{ color: 'var(--text-secondary)' }}>Taxas ({settings.shopeeFeePercent}% + R${settings.fixedFee})</small>
                             <p style={{ color: 'var(--warning-color)', fontWeight: 'bold' }}>- R$ {fees.toFixed(2)}</p>

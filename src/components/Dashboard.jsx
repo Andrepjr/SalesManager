@@ -36,7 +36,7 @@ const Dashboard = () => {
                 <p style={{ color: 'var(--text-secondary)' }}>Visão geral do seu negócio</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
+            <div className="dashboard-grid">
                 <StatCard
                     title="Faturamento Total"
                     value={formatCurrency(stats.totalRevenue)}

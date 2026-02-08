@@ -23,17 +23,17 @@ const SalesLog = () => {
                 <p style={{ color: 'var(--text-secondary)' }}>Histórico de todas as vendas realizadas.</p>
             </div>
 
-            <div className="glass-panel" style={{ overflowX: 'auto' }}>
+            <div className="glass-panel table-container">
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                     <thead>
-                        <tr style={{ borderBottom: '1px solid var(--glass-border)' }}>
-                            <th style={{ padding: '1rem' }}>Data</th>
-                            <th style={{ padding: '1rem' }}>Produto</th>
-                            <th style={{ padding: '1rem' }}>Qtd</th>
-                            <th style={{ padding: '1rem' }}>Total Venda</th>
-                            <th style={{ padding: '1rem' }}>Taxas (Shopee)</th>
-                            <th style={{ padding: '1rem' }}>Lucro</th>
-                            <th style={{ padding: '1rem' }}>Ações</th>
+                        <tr className="table-header">
+                            <th className="table-cell">Data</th>
+                            <th className="table-cell">Produto</th>
+                            <th className="table-cell">Qtd</th>
+                            <th className="table-cell">Total Venda</th>
+                            <th className="table-cell">Taxas (Shopee)</th>
+                            <th className="table-cell">Lucro</th>
+                            <th className="table-cell">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,18 +45,18 @@ const SalesLog = () => {
                             </tr>
                         ) : (
                             sortedSales.map(sale => (
-                                <tr key={sale.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                                    <td style={{ padding: '1rem', whiteSpace: 'nowrap', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                                <tr key={sale.id} className="table-row">
+                                    <td className="table-cell" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                         {formatDate(sale.date)}
                                     </td>
-                                    <td style={{ padding: '1rem', fontWeight: 600 }}>{sale.productName}</td>
-                                    <td style={{ padding: '1rem' }}>{sale.quantity}</td>
-                                    <td style={{ padding: '1rem' }}>{formatCurrency(sale.totalSoldPrice)}</td>
-                                    <td style={{ padding: '1rem', color: 'var(--warning-color)' }}>- {formatCurrency(sale.totalFees)}</td>
-                                    <td style={{ padding: '1rem', color: sale.netProfit >= 0 ? 'var(--success-color)' : 'var(--danger-color)', fontWeight: 'bold' }}>
+                                    <td className="table-cell" style={{ fontWeight: 600 }}>{sale.productName}</td>
+                                    <td className="table-cell">{sale.quantity}</td>
+                                    <td className="table-cell">{formatCurrency(sale.totalSoldPrice)}</td>
+                                    <td className="table-cell" style={{ color: 'var(--warning-color)' }}>- {formatCurrency(sale.totalFees)}</td>
+                                    <td className="table-cell" style={{ color: sale.netProfit >= 0 ? 'var(--success-color)' : 'var(--danger-color)', fontWeight: 'bold' }}>
                                         {formatCurrency(sale.netProfit)}
                                     </td>
-                                    <td style={{ padding: '1rem' }}>
+                                    <td className="table-cell">
                                         <button
                                             onClick={() => handleDelete(sale.id)}
                                             title="Excluir Venda"

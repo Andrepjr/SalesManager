@@ -21,9 +21,9 @@ function App() {
 
   return (
     <StoreProvider>
-      <div style={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden' }}>
+      <div className="app-container">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-        <main style={{ flex: 1, padding: '1rem', overflowY: 'auto' }}>
+        <main className="main-content">
           {renderContent()}
         </main>
       </div>

@@ -1,0 +1,193 @@
+/* Layout Structure */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: var(--bg-primary);
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    padding-bottom: 6rem;
+    /* Space for bottom nav on mobile */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    height: calc(100vh - 2rem);
+    margin: 1rem;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.nav-link.active {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--text-primary);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Forms */
+.form-container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: grid;
+    gap: 0.5rem;
+}
+
+/* Headers */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Tables */
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+}
+
+.table-header {
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.table-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table-cell {
+    padding: 1rem;
+    white-space: nowrap;
+    /* Prevent wrapping in cells */
+}
+
+/* Buttons */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* MOBILE STYLES (Max Width 768px) */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    /* Transform Sidebar to Bottom Navigation */
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0.5rem;
+        flex-direction: row;
+        justify-content: space-around;
+        background: rgba(15, 23, 42, 0.95);
+        /* Dark background */
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--glass-border);
+        border-radius: 0;
+        z-index: 1000;
+        box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar .logo {
+        display: none;
+        /* Hide logo in bottom nav */
+    }
+
+    .sidebar nav {
+        flex-direction: row !important;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .sidebar .version-tag {
+        display: none;
+    }
+
+    .nav-link {
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.5rem;
+        font-size: 0.75rem;
+        justify-content: center;
+        border-radius: var(--radius-sm);
+    }
+
+    .nav-link span:first-child {
+        font-size: 1.5rem;
+        /* Larger icons */
+    }
+
+    /* Main Content Adjustments */
+    .main-content {
+        padding: 1rem;
+        padding-bottom: 5rem;
+        /* Ensure content isn't hidden behind nav */
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    /* Form Adjustments */
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .form-grid-2 {
+        grid-template-columns: 1fr;
+        /* Stack inputs */
+        gap: 1rem;
+    }
+
+    /* Simulation Card text */
+    .simulation-grid {
+        grid-template-columns: 1fr 1fr !important;
+        /* 2x2 grid instead of 4x1 */
+    }
+}
